@@ -1,0 +1,218 @@
+html, body{ margin: 0; padding: 0; font-family: "微软雅黑"; }
+.clear:after{ content:""; display:block; clear:both; }
+.clear{ zoom:1; }                    
+
+body{
+  background: #f5f5f6;
+}
+
+/* 动画库 */
+@-webkit-keyframes myFadeIn {
+  from {
+    bottom: -1rem;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0rem;
+    opacity: 1;
+  }
+}
+@keyframes myFadeIn {
+  from {
+    bottom: -1rem;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0rem;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fontPoint {
+  from{
+    font-size: .8rem;
+  }
+  to{
+    font-size: 1rem;
+    color: #ff6827;
+  }
+}
+@keyframes fontPoint {
+  from{
+    font-size: .8rem;
+  }
+  to{
+    font-size: 1rem;
+    color: #ff6827;
+  }
+}
+@-webkit-keyframes fontLost {
+  from{
+    font-size: 1rem;
+  }
+  to{
+    font-size: .8rem;
+  }
+}
+@keyframes fontLost {
+  from{
+    font-size: 1rem;
+  }
+  to{
+    font-size: .8rem;
+  }
+}
+
+@-webkit-keyframes inputPoint {
+  from{
+    width: 12rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  to{
+    width: 12.5rem;
+    border: 1px solid #ff6827;
+  }
+}
+
+@keyframes inputPoint {
+  from{
+    width: 12rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  to{
+    width: 12.5rem;
+    border: 1px solid #ff6827;
+  }
+}
+@-webkit-keyframes inputLost {
+  from{
+    width: 12.5rem;
+    border: 1px solid #ff6827;
+  }
+  to{
+    width: 12rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+@keyframes inputLost {
+  from{
+    width: 12.5rem;
+    border: 1px solid #ff6827;
+  }
+  to{
+    width: 12rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.font_point{
+  -webkit-animation-name: fontPoint;
+          animation-name: fontPoint;
+  -webkit-animation-duration: .2s;
+          animation-duration: .2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.font_lost{
+  -webkit-animation-name: fontLost;
+          animation-name: fontLost;
+  -webkit-animation-duration: .2s;
+          animation-duration: .2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.input_point{
+  -webkit-animation-name: inputPoint;
+          animation-name: inputPoint;
+  -webkit-animation-duration: .2s;
+          animation-duration: .2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.input_lost{
+  -webkit-animation-name: inputLost;
+          animation-name: inputLost;
+  -webkit-animation-duration: .2s;
+          animation-duration: .2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+#main{
+  position: absolute;
+  margin: auto;
+  background: white;
+  width: 1200px;
+  height: 700px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  border-radius: 20px;
+}
+.box{
+  float: left;
+  height: 700px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* 左部标题 */
+#left{
+  width: 700px;
+  background: url('../assets/login_left_bg.jpg');
+}
+#left img{
+  margin: 2rem;
+  width: 2rem;
+  position: relative;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-name: myFadeIn;
+          animation-name: myFadeIn;
+}
+#left_title{
+  font-size: 3rem;
+  color: white;
+  text-align: center;
+  margin-top: 5rem;
+  position: relative;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-name: myFadeIn;
+          animation-name: myFadeIn;
+}
+
+/* 右部组件 */
+#right{
+  width: 500px;
+  padding: 60px;
+  position: relative;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-name: myFadeIn;
+          animation-name: myFadeIn;
+}
+#right_title{
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 2.5rem;
+  text-align: center;
+  opacity: .9;
+  font-weight: bold;
+}
+#right_subtitle{
+  width: 300px;
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+  opacity: .5;
+}

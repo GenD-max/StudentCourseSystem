@@ -1,0 +1,38 @@
+###
+POST http://192.168.50.115:8088/openRelay/4
+###
+POST http://192.168.50.115:8088/closeRelay/4
+###
+GET  http://192.168.50.115:8088/getAllRelayState
+###
+POST http://localhost:9000/admin/login?account=@Admin123&password=123456
+###
+GET http://localhost:9000/admin/userInfo?id=@Admin123
+###
+POST http://localhost:9000/teacher/insertTeacher?Tid=1654&Tname=董梦龙&Tpassword=666666&Tsex=男&Tintroduce=111
+###
+GET http://localhost:9000/student/getSchedule/19114731
+###
+GET http://localhost:9000/student/getPageStudent/1/3
+###
+GET http://localhost:9000/student/getOneStudent/19114731
+###
+GET http://localhost:9000/student/getGrade/19114731
+###
+GET http://localhost:9000/teacher/getPageCourse/1/2
+###
+GET http://localhost:9000/teacher/getOneCourse/1003
+###
+POST http://localhost:9000/student/insertCoursePlan?Tid=0002&Cname=111&Sid=19114731&Cid=2005&Monday=&Tuesday=&Wednesday=&Tuesday=
+###
+GET http://localhost:9000/student/getGrade/19114731
+###
+GET http://localhost:9000/teacher/getSchedule/0022
+###
+GET http://localhost:9000/teacher/queryGrade/@YueYi/3001
+###
+GET http://localhost:9000/queryFaculity
+###
+POST http://localhost/api/student/insertCoursePlan?Cname=Vue%E5%BC%80%E5%8F%91%E4%B8%8E%E8%AF%BE%E7%A8%8B%E5%AE%9E%E8%B7%B5&Sid=19114731&Cid=3002&Tid=@YueYi&Monday=&Tuesday=&Wednesday=&Thursday=1,2&Friday=
+###
+POST http://www.gendml.cn:9000/api/student/register?Sid=&Spassword=&Sname=&Ssex=&Sidcard=&Sgrade=&Sinstitution=

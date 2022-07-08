@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- IoC注解解析器 -->
+    <context:component-scan base-package="com.gendml"/>
+
+    <!-- DI注解解析器 -->
+    <context:annotation-config/>
+
+    <!-- 加载数据库配置信息 -->
+    <context:property-placeholder location="classpath:config/druid.properties" system-properties-mode="NEVER"/>
+    <!-- 连接池对象 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="url" value="${url}"/>
+        <property name="initialSize" value="${initialSize}"/>
+        <property name="minIdle" value="${minIdle}"/>
+        <property name="maxActive" value="${maxActive}"/>
+        <!--配置获取连接等待超时的时间-->
+        <property name="maxWait" value="${maxWait}"/>
+        <!--配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒-->
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+        <!--配置一个连接在池中最小生存的时间，单位是毫秒-->
+        <property name="minEvictableIdleTimeMillis" value="${timeBetweenEvictionRunsMillis}"/>
+    </bean>
+
+    <!--配置sqlSessionFactory-->
+    <bean id="sqlSessionFactory"
+          class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 加载xxMapper.xml -->
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:mapper/*Mapper.xml</value>
+            </array>
+        </property>
+        <!-- 配置分页插件 -->
+        <property name="plugins">
+            <array>
+                <!--传入分页拦截器-->
+                <bean class="com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor">
+                    <property name="interceptors" ref="paginationInnerInterceptor"/>
+                </bean>
+            </array>
+        </property>
+    </bean>
+    <!--分页拦截器-->
+    <bean id="paginationInnerInterceptor" class="com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor">
+        <property name="dbType" value="MYSQL"/>
+    </bean>
+
+    <!--Mapper接口代理扫描器-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 需要生成代理类对象的mapper接口包 -->
+        <property name="basePackage" value="com.gendml.mapper"/>
+        <!-- sqlSessionFactory 的name 用于为代理类中生成SqlSession -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!-- MP 全局配置 -->
+    <bean id="globalConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
+        <!-- 全局的主键策略 -->
+        <property name="dbConfig" ref="dbConfig"/>
+    </bean>
+    <bean id="dbConfig" class="com.baomidou.mybatisplus.core.config.GlobalConfig.DbConfig">
+        <!--映射数据库下划线字段名到数据库实体类的驼峰命名的映射-->
+        <property name="tableUnderline" value="false"/>
+    </bean>
+
+
+    <!-- 配置事务 -->
+    <bean id="txManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+</beans>
