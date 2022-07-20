@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 /**
  * @author Зөндөө
  * @create 2022-05-28 22:18
@@ -27,5 +29,5 @@ public class Teacher {
     private String Temail;
     private String Tphotourl;
     private String Tintroduction;
-    private String Tmodtime;
+    private Date Tmodtime;
 }

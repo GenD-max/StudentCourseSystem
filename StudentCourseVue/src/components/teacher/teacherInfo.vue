@@ -57,7 +57,7 @@
                         </el-form-item>
                     </el-form>
                     <div slot="footer" class="dialog-footer">
-                        <el-button @click="dialogFormVisible = false">取 消</el-button>
+                        <el-button @click="dialogFormVisible = false;updateTeacherArray()">取 消</el-button>
                         <el-button type="primary" @click="dialogFormVisible = false; onSubmit()">确 定</el-button>
                     </div>
                 </el-dialog>
@@ -125,7 +125,7 @@ export default ({
                         .post("teacher/updateTeacher", params)
                         .then(res => {
                             if (res.data.code == 200) {
-                                this.$message.success("修改成功")
+                                this.$message.success("修改成功");
                             }
                         })
                         .catch((err) => {
@@ -137,21 +137,24 @@ export default ({
                     return false;
                 }
             })
+        },
+        updateTeacherArray() {
+            this.axios
+                .get("teacher/getOneTeacher/" + this.$store.state.id)
+                .then(res => {
+                    if (res.data.code == 200) {
+                        this.teacherInfo = res.data.data;
+                        // console.log(this.teacherInfo)
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.$message("无法连接到服务器，请检查接口")
+                });
         }
     },
     mounted() {
-        this.axios
-            .get("teacher/getOneTeacher/" + this.$store.state.id)
-            .then(res => {
-                if (res.data.code == 200) {
-                    this.teacherInfo = res.data.data;
-                    // console.log(this.teacherInfo)
-                }
-            })
-            .catch(err => {
-                console.log(err);
-                this.$message("无法连接到服务器，请检查接口")
-            });
+        this.updateTeacherArray();
     }
 })
 </script>

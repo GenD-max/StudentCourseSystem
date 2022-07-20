@@ -66,7 +66,7 @@
                         </el-form-item>
                     </el-form>
                     <div slot="footer" class="dialog-footer">
-                        <el-button @click="dialogFormVisible = false">取 消</el-button>
+                        <el-button @click="dialogFormVisible = false;updateStudentArray()">取 消</el-button>
                         <el-button type="primary" @click="dialogFormVisible = false; onSubmit()">确 定</el-button>
                     </div>
                 </el-dialog>
@@ -80,17 +80,20 @@ export default ({
     data() {
         return {
             studentInfo: {
-                sid: "",
-                sname: "",
-                ssex: "",
-                sage: "",
-                sidcard: "",
+
+            },
+            form: {
+                Sid: "",
+                Sname: "",
+                Ssex: "",
+                Sage: "",
+                Sidcard: "",
                 sgrade: "",
-                sprofession: "",
-                sclass: "",
-                sinstitution: "",
-                spassword: "",
-                smodtime: ""
+                Sprofession: "",
+                Sclass: "",
+                Sinstitution: "",
+                Spassword: "",
+                Smodtime: ""
             },
             dialogTableVisible: false,
             dialogFormVisible: false,
@@ -118,52 +121,54 @@ export default ({
     },
     methods: {
         onSubmit() {
-            // console.log(new Date().toLocaleString())
-            // console.log(this.studentInfo.sinstitution)
+            this.form.Sid = this.studentInfo.sid;
+            this.form.Sname = this.studentInfo.sname;
+            this.form.Ssex = this.studentInfo.ssex;
+            this.form.Sage = this.studentInfo.sage;
+            this.form.Sidcard = this.studentInfo.sidcard;
+            this.form.Sgrade = this.studentInfo.sgrade;
+            this.form.Sprofession = this.studentInfo.sprofession;
+            this.form.Sclass = this.studentInfo.sclass;
+            this.form.Sinstitution = this.studentInfo.sinstitution;
+            this.form.Spassword = this.studentInfo.spassword;
+            this.form.Smodtime = new Date().toLocaleString();
+            var parmas = this.$qs.stringify(this.form);
             this.$refs.studentInfo.validate(valid => {
                 if (valid) {
                     this.axios
-                        .post("student/updateStudent?Sid=" + this.$store.state.id +
-                            "&Sname=" + this.studentInfo.sname +
-                            "&Ssex=" + this.studentInfo.ssex +
-                            "&Sidcard=" + this.studentInfo.sidcard +
-                            "&Sprofession=" + this.studentInfo.sprofession +
-                            "&Spassword=" + this.studentInfo.spassword +
-                            "&Sage=" + this.studentInfo.sage +
-                            "&Sgrade=" + this.studentInfo.sgrade +
-                            "&Sclass=" + this.studentInfo.sclass +
-                            "&Sinstitution=" + this.studentInfo.sinstitution +
-                            "&Smodtime=" + new Date().toLocaleString()
-                        )
+                        .post("student/updateStudent", parmas)
                         .then(res => {
                             if (res.data.code == 200) {
-                                this.$message.success("修改成功")
+                                this.$message.success("修改成功");
                             }
                         })
                         .catch((err) => {
                             console.log(err)
-                            this.$message("接口异常，无法连接服务器")
+                            this.$message("接口异常，无法连接服务器");
                         }
                         )
                 } else {
                     return false;
                 }
             })
+        },
+        updateStudentArray() {
+            this.axios
+                .get("student/getOneStudent/" + this.$store.state.id)
+                .then(res => {
+                    if (res.data.code == 200) {
+                        this.studentInfo = res.data.data;
+                        // console.log(this.studentInfo)
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.$message("无法连接到服务器，请检查接口")
+                });
         }
     },
     mounted() {
-        this.axios
-            .get("student/getOneStudent/" + this.$store.state.id)
-            .then(res => {
-                if (res.data.code == 200) {
-                    this.studentInfo = res.data.data;
-                    // console.log(this.studentInfo)
-                }
-            })
-            .catch(err => {
-                console.log(err);
-                this.$message("无法连接到服务器，请检查接口")
-            });
+        this.updateStudentArray();
         this.axios
             .get("queryFaculity")
             .then(res => {
