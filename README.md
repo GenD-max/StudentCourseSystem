@@ -1,6 +1,6 @@
 # 设计文档
 
-> - 前端开源项目[CollegeElective-System](https://github.com/EsunR/CollegeElective-System)
+> - 前端来自于开源项目[CollegeElective-System](https://github.com/EsunR/CollegeElective-System)
 > - 本人独立构建了数据库和后端部分，并根据业务逻辑在小哥的开源项目上进行了更改和改进，使其更适应我的数据库
 > - 项目已部署至云端：[学生选课系统](http://www.gendml.cn:9000/)
 >- 第一次使用vue-cli开发项目，如果详项目代码存在不严谨或错误的地方，欢迎各位指出，共同讨论
