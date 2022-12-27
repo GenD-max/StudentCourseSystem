@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 10.4.28.77-MySQL
+ Source Server         : 
  Source Server Type    : MySQL
- Source Server Version : 50536
- Source Host           : 127.0.0.1:3306
+ Source Server Version : 50651
+ Source Host           : 
  Source Schema         : course-select
 
  Target Server Type    : MySQL
- Target Server Version : 50536
+ Target Server Version : 50651
  File Encoding         : 65001
 
- Date: 20/07/2022 22:08:00
+ Date: 27/12/2022 16:26:47
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `admin`  (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('@Admin123', 'Admin', '123456');
+INSERT INTO `admin` VALUES ('19114731', 'Gendml', '123456');
 
 -- ----------------------------
 -- Table structure for course
@@ -55,19 +55,17 @@ CREATE TABLE `course`  (
   `Courseweek` varchar(12) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `Cclassroom` varchar(12) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `Cteachbuilding` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Cmodtime` datetime NULL DEFAULT NULL,
+  `Cmodtime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`Cid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES ('1003', '0005', '面向对象程序设计', 3.0, 'JavaSE基础', '必修', '计算机学院', '计算机科学与技术', '1,2', '3', NULL, '3', NULL, '大三下学期', '1-10周', '107', '经计楼', NULL);
-INSERT INTO `course` VALUES ('1005', '0022', '大学英语（2）', 2.0, '大学英语（2）', '必修', '外国语学院', '外国语所有专业', NULL, '2,4', NULL, NULL, '1,2', '大三下学期', '1-16周', '308', '经计楼', NULL);
-INSERT INTO `course` VALUES ('1010', '1010', '编译原理', 3.0, '计算机语言编译底层解析', '必修', '计算机学院', '计算机科学与技术', NULL, '5', NULL, NULL, NULL, '大三下学期', '1-8周', '506', '博学楼', NULL);
-INSERT INTO `course` VALUES ('2002', '5010', '网络工程', 1.5, '网络安全、网络路由配置', '必修', '计算机学院', '网络工程', NULL, NULL, NULL, '2', NULL, '大三下学期', '1-6周', '401', '勤学楼', NULL);
-INSERT INTO `course` VALUES ('2003', '1003', 'C语言基础', 2.0, 'C语言介绍使用', '必修', '计算机学院', '所有', NULL, NULL, '3', NULL, NULL, '大三下学期', '12-16周', '308', '经计楼', NULL);
-INSERT INTO `course` VALUES ('2004', '0022', '大学英语（1）', 1.5, '大学英语', '必修', '所有', '所有', '3,4', NULL, NULL, NULL, '1,3', '大三下学期', '2-10周', '308', '经计楼', NULL);
+INSERT INTO `course` VALUES ('1003', '@MTC8800', '面向对象程序设计', 3.0, 'JavaSE基础', '必修', '计算机学院', '计算机科学与技术', '1,2', '3', NULL, '3', NULL, '大三下学期', '1-10周', '107', '经计楼', NULL);
+INSERT INTO `course` VALUES ('1005', '@ZFZ6699', '大学英语（2）', 2.0, '大学英语（2）', '必修', '外国语学院', '外国语所有专业', NULL, '2,4', NULL, NULL, '1,2', '大三下学期', '1-16周', '308', '经计楼', NULL);
+INSERT INTO `course` VALUES ('1010', '@ZJL2256', '编译原理', 3.0, '计算机语言编译底层解析', '必修', '计算机学院', '计算机科学与技术', '', '5,4', '', '', '4', '大三下学期', '1-8周', '506', '博学楼', NULL);
+INSERT INTO `course` VALUES ('2002', '@ZJL2256', '网络工程', 1.5, '网络安全、网络路由配置', '必修', '计算机学院', '网络工程', '', '', '', '2,3', '', '大三下学期', '1-6周', '401', '勤学楼', NULL);
 
 -- ----------------------------
 -- Table structure for courseplan
@@ -91,6 +89,8 @@ CREATE TABLE `courseplan`  (
 -- ----------------------------
 -- Records of courseplan
 -- ----------------------------
+INSERT INTO `courseplan` VALUES ('1003', '面向对象程序设计', '19114731', '@MTC8800', '1,2', '3', '', '3', '');
+INSERT INTO `courseplan` VALUES ('1010', '编译原理', '19114731', '@ZJL2256', '', '5,4', '', '', '4');
 
 -- ----------------------------
 -- Table structure for faculity
@@ -121,12 +121,14 @@ CREATE TABLE `sc`  (
   `Tid` char(12) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `Cid` char(4) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Ggrade` int(3) NULL DEFAULT NULL,
-  `Gmodtime` datetime NULL DEFAULT NULL
+  `Gmodtime` datetime(0) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sc
 -- ----------------------------
+INSERT INTO `sc` VALUES ('19114731', '@ZJL2256', '1010', 99, '2022-12-27 00:00:00');
+INSERT INTO `sc` VALUES ('19114731', '@MTC8800', '1003', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for student
@@ -144,7 +146,7 @@ CREATE TABLE `student`  (
   `Sprofession` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `Sinstitution` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Sphotourl` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Smodtime` datetime NULL DEFAULT NULL,
+  `Smodtime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`Sid`) USING BTREE,
   INDEX `class`(`Sclass`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
@@ -152,10 +154,7 @@ CREATE TABLE `student`  (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES ('19114655', '刘浩存', '123456789', '女', '666666', NULL, '2019', NULL, NULL, '理学院', NULL, '2022-05-30 23:46:34');
-INSERT INTO `student` VALUES ('19114731', '董梦龙', '34151513234185', '男', '123456', '', '', '22', '22', '信息与计算机学院', NULL, '2022-07-20 22:02:36');
-INSERT INTO `student` VALUES ('19114744', '李悦悦', '140581996101262156', '男', '123123', '22', '2019', '一班', '计算机科学与技术', '信息与计算机学院', NULL, NULL);
-INSERT INTO `student` VALUES ('19114766', '周杰伦', '848155645615646615', '男', '999999', '42', '1980', '三班', '机械与自动化', '工学院', 'student1.png', NULL);
+INSERT INTO `student` VALUES ('19114731', 'Gendml', '110111201404104596', '男', 'zxcvbnm', '', '', '一班', '计算机科学与技术', '信息与计算机学院', NULL, '2022-12-27 16:25:14');
 
 -- ----------------------------
 -- Table structure for teacher
@@ -171,19 +170,15 @@ CREATE TABLE `teacher`  (
   `Temail` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `Tphotourl` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `Tintroduction` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Tmodtime` datetime NULL DEFAULT NULL,
+  `Tmodtime` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`Tid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES ('0002', '张友华', '789789', '男', '教授', 12345678229, '123456789@163.com', 'student1.png', 'AHAU信息与计算机学院院长', NULL);
-INSERT INTO `teacher` VALUES ('0005', '涂立静', '123123', '女', '讲师', 19584527899, '1235698456@qq.com', NULL, '小美好~', NULL);
-INSERT INTO `teacher` VALUES ('0022', '崔芳芳', '111111', '女', '讲师', 19623558496, '52698342@ahau.edu.cn', NULL, 'I am Ms.Cui.', NULL);
-INSERT INTO `teacher` VALUES ('1003', '吴国栋', '123456', '男', '教授', 16356987455, 'wugd@ahau.edu.cn', NULL, '随和！~', NULL);
-INSERT INTO `teacher` VALUES ('1010', '许高建', '999999', '男', '副教授', 147569725367, '123235@qq.com', NULL, '教学有方', '2022-07-20 21:51:45');
-INSERT INTO `teacher` VALUES ('5010', '高宁', '123321', '女', '讲师', 13659842553, '1256982364@qq.com', NULL, '和蔼可亲', NULL);
-INSERT INTO `teacher` VALUES ('@Wu123', '吴云志', '123456', '女', '副教授', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `teacher` VALUES ('@MTC8800', '苗添池', 'tiaotianchi', '男', '副教授', 18691784907, 'hgv1231@gmail.com', 'student1.png', NULL, NULL);
+INSERT INTO `teacher` VALUES ('@ZFZ6699', '	\r\n郑夫子', 'zhengfuzi', '男', '副教授', 19856967830, 'fhFq@live.com', 'student1.png', NULL, NULL);
+INSERT INTO `teacher` VALUES ('@ZJL2256', '周杰伦', 'zhoujielun', '男', '教授', 18827264529, '2BNN6v2@163.com', 'student1.png', '哎呦不错呦', '2022-12-27 16:23:16');
 
 SET FOREIGN_KEY_CHECKS = 1;
