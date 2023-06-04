@@ -4,8 +4,6 @@ import login from './components/Login.vue'
 import register from './components/Register.vue'
 
 
-
-
 Vue.use(Router)
 var router = new Router({
   routes: [
